@@ -10,7 +10,7 @@
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <script>
+ <script>
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
@@ -29,7 +29,7 @@
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     
     // Move the sphere to the right of the cube (e.g., +2 units on x axis)
-    sphere.position.x = 2;
+    sphere.position.x = -8;
     scene.add(sphere);
       
     const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -38,11 +38,24 @@
 
     camera.position.z = 5;
 
+	// Movement speed
+	let speed = 0.04;
+
     function animate() 
     {
       requestAnimationFrame(animate);
+
+	// Move sphere
+	sphere.position.x += speed;
+
+    if (sphere.position.x > 8 || sphere.position.x < -8) 
+	{
+        speed = -speed; // Flip direction
+    }
+
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
+
       renderer.render(scene, camera);
     }
 
