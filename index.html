@@ -17,11 +17,21 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Cube
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshStandardMaterial({ color: 0xff77ff });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
+    // Sphere
+    const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32); // radius, widthSegs, heightSegs
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    
+    // Move the sphere to the right of the cube (e.g., +2 units on x axis)
+    sphere.position.x = 2;
+    scene.add(sphere);
+      
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
